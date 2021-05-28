@@ -5,6 +5,10 @@ use App\Http\Controllers\Backend\DashboardController;
 use App\Http\Controllers\TestController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\SuperAdminController;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
+
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -24,12 +28,10 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::get('admin/dashboard', [AdminController::class,'index'])->name('admin.dashboard');
+// Route::get('admin/dashboard', [AdminController::class,'index'])->name('admin.dashboard');
 Route::get('super/admin/dashboard', [SuperAdminController::class,'index'])->name('superadmin.dashboard');
 
 Route::resource('/tests',TestController::class);
-
-Route::get('/dashboard', [DashboardController::class, 'dashboard'])->name('dashboard');
 
 Route::get('userprofile', function () {
     if ( Gate::allows('user-only', Auth::user())) {
@@ -38,9 +40,8 @@ Route::get('userprofile', function () {
     } else {
         return view('welcome');
     }
-});
+})->name('username');
 
-/*
 Route::get('dashboard', function () {
     if ( Gate::allows('admin-only', Auth::user())) {
         
@@ -48,5 +49,4 @@ Route::get('dashboard', function () {
     } else {
         return view('welcome');
     }
-});
-*/
+})->name('dashboard');

@@ -40,7 +40,7 @@
                     @endcan
 
                     @can('admin-only', Auth::user())
-                    <li><a href="{{ route('admin.dashboard') }}">Dashboard</a></li>
+                    <li><a href="{{ route('dashboard') }}">Dashboard</a></li>
                     @endcan
 
                     <li><a onclick="event.preventDefault();
